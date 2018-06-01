@@ -19,6 +19,7 @@
   file:
     path: "{{ vault_configuration_path }}"
     state: directory
+    mode: "u=rwx,g=rwx,o=rx"
 
 - name: "Create configuration file based on template"
   template:
