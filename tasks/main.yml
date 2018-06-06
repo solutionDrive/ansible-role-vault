@@ -10,7 +10,7 @@
   unarchive:
     src: "{{ vault_app_download_location }}/{{ vault_app_zip }}"
     remote_src: yes
-    dest: "/usr/local/bin"
+    dest: "{{ vault_exec_path }}"
     mode: "u+rwx"
     owner: solution
     creates: /usr/local/bin/vault
@@ -26,3 +26,17 @@
     src: vault_config.hcl.j2
     dest: "{{ vault_configuration_path }}/config.hcl"
     mode: "u=rwx,g=rwx,o=r"
+
+- name: "create service for vault server"
+  template:
+    src: vault.service.j2
+    dest: /lib/systemd/system/vault.service
+    mode: 0644
+  notify: restart vault
+
+- name: link service
+  file:
+    src: /lib/systemd/system/vault.service
+    path: /etc/systemd/system/vault.service
+    state: link
+  notify: restart vault

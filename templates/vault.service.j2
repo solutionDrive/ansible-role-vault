@@ -1,0 +1,13 @@
+[Unit]
+Description=vault server
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+EnvironmentFile=-{{ vault_configuration_path }}
+Restart=on-failure
+ExecStart={{ vault_exec_path }}/vault server $OPTIONS -config={{ vault_configuration_path }}/config.hcl
+ExecStop={{ vault_exec_path }}/vault step-down
+
+[Install]
+WantedBy=multi-user.target

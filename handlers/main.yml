@@ -1,2 +1,5 @@
 ---
-# handlers file for solutiondrive.vault
+- name: "restart vault"
+  service:
+    name: vault
+    state: restarted
