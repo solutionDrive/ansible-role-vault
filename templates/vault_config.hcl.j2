@@ -1,7 +1,18 @@
+{% if 'inmem' == vault_storage_type %}
 storage "{{ vault_storage_type }}" {}
+{% elif 'mysql' == vault_storage_type %}
+storage "mysql" {
+    address      = "{{ vault_storage_mysql_address }}"
+    username     = "{{ vault_storage_mysql_username }}"
+    password     = "{{ vault_storage_mysql_password }}"
+    database     = "{{ vault_storage_mysql_database }}"
+    table        = "{{ vault_storage_mysql_table }}"
+    max_parallel = {{ vault_storage_mysql_max_parallel }}
+}
+{% endif %}
 
 disable_mlock = "{{ vault_storage_disable_mlock }}"
 listener "tcp" {
-   address = "{{ vault_listener_ip }}:{{ vault_listener_port }}"
-   tls_disable = {{ vault_listener_disable_tls }}
+    address = "{{ vault_listener_ip }}:{{ vault_listener_port }}"
+    tls_disable = {{ vault_listener_disable_tls }}
 }
