@@ -28,7 +28,7 @@
     mode: "u=rwx,g=rwx,o=r"
   register: deamon_reload
   notify:
-  - reload service daemon
+  - reload systemd daemon
 
 - name: "Create configuration file based on template"
   template:
@@ -54,5 +54,5 @@
     path: /etc/systemd/system/multi-user.target.wants/vault.service
     state: link
   notify:
-  - reload service daemon
+  - reload systemd daemon
   - restart vault
