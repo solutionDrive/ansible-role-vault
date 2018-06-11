@@ -26,6 +26,7 @@
     src: vault_config.hcl.j2
     dest: "{{ vault_configuration_path }}/config.hcl"
     mode: "u=rwx,g=rwx,o=r"
+  notify: restart vault
 
 - name: "create service for vault server"
   template:
