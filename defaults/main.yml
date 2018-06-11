@@ -15,6 +15,7 @@ vault_app_zip : '{{vault_app_name}}.zip'
 vault_app_url : '{{vault_app_mirror}}/{{vault_app}}/{{vault_app_version}}/{{vault_app_zip}}'
 
 vault_configuration_path: /etc/vault
+vault_env_file_name: .env
 
 vault_app_download_location: /tmp/
 

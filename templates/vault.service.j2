@@ -4,10 +4,10 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
-EnvironmentFile=-{{ vault_configuration_path }}
+EnvironmentFile=-{{ vault_configuration_path }}/{{ vault_env_file_name }}
 Restart=on-failure
 ExecStart={{ vault_exec_path }}/vault server $OPTIONS -config={{ vault_configuration_path }}/config.hcl
-ExecStop=VAULT_ADDR=127.0.0.1:{{ vault_listener_port }} {{ vault_exec_path }}/vault operator step-down
+ExecStop=a{{ vault_exec_path }}/vault operator step-down
 
 [Install]
 WantedBy=multi-user.target

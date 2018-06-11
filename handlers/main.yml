@@ -3,3 +3,6 @@
   service:
     name: vault
     state: restarted
+
+- name: "reload systemd daemon"
+  command: systemctl daemon-reload
