@@ -1,3 +1,4 @@
+ui = "{{ vault_use_builtin_ui }}"
 {% if 'inmem' == vault_storage_type %}
 storage "{{ vault_storage_type }}" {}
 {% elif 'mysql' == vault_storage_type %}

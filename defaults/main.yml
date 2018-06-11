@@ -31,3 +31,4 @@ vault_storage_mysql_password: ""
 vault_storage_mysql_database: "vault"
 vault_storage_mysql_table: "vault"
 vault_storage_mysql_max_parallel: 100
+vault_use_builtin_ui: false
