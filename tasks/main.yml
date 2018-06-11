@@ -50,8 +50,8 @@
   notify:
   register: run_handlers
 
- - name: "Notify handler {{ item }}"
-   notify: "{{ item }}"
-   with_items:
-    - "reload systemd daemon"
-    - "restart vault"
+- name: "Notify handlers"
+  notify: "{{ item }}"
+  with_items:
+  - "reload systemd daemon"
+  - "restart vault"
