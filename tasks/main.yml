@@ -53,5 +53,5 @@
  - name: "Notify handler {{ item }}"
    notify: "{{ item }}"
    with_items:
-    - reload systemd daemon
-    - restart vault
+    - "reload systemd daemon"
+    - "restart vault"
