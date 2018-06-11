@@ -26,18 +26,21 @@
     src: vault_config.hcl.j2
     dest: "{{ vault_configuration_path }}/config.hcl"
     mode: "u=rwx,g=rwx,o=r"
-  notify: restart vault
+  notify:
+  - restart vault
 
 - name: "create service for vault server"
   template:
     src: vault.service.j2
     dest: /lib/systemd/system/vault.service
     mode: 0644
-  notify: restart vault
+  notify:
+  - restart vault
 
 - name: link service
   file:
     src: /lib/systemd/system/vault.service
     path: /etc/systemd/system/multi-user.target.wants/vault.service
     state: link
-  notify: restart vault
+  notify:
+  - restart vault
