@@ -7,7 +7,7 @@ After=network-online.target
 EnvironmentFile=-{{ vault_configuration_path }}/{{ vault_env_file_name }}
 Restart=on-failure
 ExecStart={{ vault_exec_path }}/vault server $OPTIONS -config={{ vault_configuration_path }}/config.hcl
-ExecStop=a{{ vault_exec_path }}/vault operator step-down
+ExecStop={{ vault_exec_path }}/vault operator step-down
 
 [Install]
 WantedBy=multi-user.target
