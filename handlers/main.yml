@@ -1,4 +1,7 @@
 ---
+- name: "reload systemd daemon"
+  command: systemctl daemon-reload
+
 - name: "restart vault"
   service:
     name: vault

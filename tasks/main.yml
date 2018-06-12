@@ -21,23 +21,38 @@
     state: directory
     mode: "u=rwx,g=rwx,o=rx"
 
+- name: "Create file for holding the environment-variables of the vault service"
+  template:
+    src: .env.j2
+    dest: "{{ vault_configuration_path }}/{{ vault_env_file_name }}"
+    mode: "u=rwx,g=rwx,o=r"
+  register: deamon_reload
+  notify:
+  - reload systemd daemon
+
 - name: "Create configuration file based on template"
   template:
     src: vault_config.hcl.j2
     dest: "{{ vault_configuration_path }}/config.hcl"
     mode: "u=rwx,g=rwx,o=r"
-  notify: restart vault
+  register: service_restart
+  notify:
+  - restart vault
 
 - name: "create service for vault server"
   template:
     src: vault.service.j2
     dest: /lib/systemd/system/vault.service
     mode: 0644
-  notify: restart vault
+  register: service_restart
+  notify:
+  - restart vault
 
 - name: link service
   file:
     src: /lib/systemd/system/vault.service
     path: /etc/systemd/system/multi-user.target.wants/vault.service
     state: link
-  notify: restart vault
+  notify:
+  - reload systemd daemon
+  - restart vault
