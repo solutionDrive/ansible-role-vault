@@ -1,41 +1,89 @@
-Role Name
-=========
+Vault
+=====
 1. The vault-server has to be started with the basic config provided by this role
 2. on your local machine you can talk to it via the cli-tool
 ```bash
 VAULT_ADDR='http://<IP.OF.THE.EC2-Machine>:8200' vault operator init
 ```
 
-A brief description of the role goes here.
-
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+    vault_token: "{{ lookup('env', 'VAULT_TOKEN') }}"
+
+    vault_app_mirror: 'https://releases.hashicorp.com'
+
+    vault_app_platform : 'linux_amd64'
+
+    vault_app_install_dir : '/opt/vault'
+
+    vault_exec_path: '/usr/local/bin'
+
+    vault_app: vault
+
+    vault_app_version: '0.10.1'
+
+    vault_app_checksum: sha256:031e521b4603487126fd353a9557dd22a02304a8a11f843e9914be59a8009c8a
+
+    vault_app_name : '{{vault_app}}_{{vault_app_version}}_{{vault_app_platform}}'
+
+    vault_app_zip : '{{vault_app_name}}.zip'
+
+    vault_app_url : '{{vault_app_mirror}}/{{vault_app}}/{{vault_app_version}}/{{vault_app_zip}}'
+
+    vault_configuration_path: /etc/vault
+
+    vault_env_file_name: .env
+
+    vault_app_download_location: /tmp/
+
+    vault_listener_ip: 0.0.0.0
+
+    vault_listener_port: 8200
+
+    vault_listener_disable_tls: 1
+
+    vault_storage_type: inmem
+
+    vault_storage_disable_mlock: false
+
+    vault_storage_mysql_address: "localhost"
+
+    vault_storage_mysql_username: "root"
+
+    vault_storage_mysql_password: ""
+
+    vault_storage_mysql_database: "vault"
+
+    vault_storage_mysql_table: "vault"
+
+    vault_storage_mysql_max_parallel: 100
+
+    vault_use_builtin_ui: false
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: vaults
       roles:
-         - { role: username.rolename, x: 42 }
+         - solutionDrive.vault
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
