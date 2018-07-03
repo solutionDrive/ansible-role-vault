@@ -1,5 +1,10 @@
 ---
-# tasks file for solutiondrive.vault
+- name: "Install required packages"
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ vault_required_packages }}"
+
 - name: "Download Zip-Archive for version {{ vault_app_version }}"
   get_url:
     url: "{{ vault_app_url }}"
