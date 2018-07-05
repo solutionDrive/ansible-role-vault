@@ -2,6 +2,9 @@
 vault_required_packages:
   - unzip
 
+vault_user: "vault"
+vault_group: "vault"
+
 vault_token: "{{ lookup('env', 'VAULT_TOKEN') }}"
 
 vault_app_mirror: 'https://releases.hashicorp.com'
