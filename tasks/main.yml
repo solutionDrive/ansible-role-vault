@@ -1,5 +1,21 @@
 ---
-# tasks file for solutiondrive.vault
+- name: "Install required packages"
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ vault_required_packages }}"
+
+- name: "Ensure group '{{ vault_group }}' exists"
+  group:
+    name: "{{ vault_group }}"
+    state: present
+
+- name: "Add the user '{{ vault_user }}' with no bash shell, set the group '{{ vault_group }}' as primary group"
+  user:
+    name: "{{ vault_user }}"
+    shell: /bin/false
+    group: "{{ vault_group }}"
+
 - name: "Download Zip-Archive for version {{ vault_app_version }}"
   get_url:
     url: "{{ vault_app_url }}"
@@ -12,7 +28,7 @@
     remote_src: yes
     dest: "{{ vault_exec_path }}"
     mode: "u+rwx"
-    owner: solution
+    owner: "{{ vault_user }}"
     creates: /usr/local/bin/vault
 
 - name: "Create folder for holding configuration of the vault"

@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: vault
   author: solutionDrive GmbH
   description: Installs vault from https://www.vaultproject.io/
   company: solutionDrive GmbH
@@ -10,7 +11,12 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - all
+        - bionic
+        - xenial
+    - name: Debian
+      versions:
+        - stretch
+        - jessie
 
   galaxy_tags:
     - vault
