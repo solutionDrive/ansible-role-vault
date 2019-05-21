@@ -4,6 +4,7 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
+User={{ vault_user }}
 EnvironmentFile=-{{ vault_configuration_path }}/{{ vault_env_file_name }}
 Restart=on-failure
 ExecStart={{ vault_exec_path }}/vault server $OPTIONS -config={{ vault_configuration_path }}/config.hcl
