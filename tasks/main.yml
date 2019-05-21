@@ -79,3 +79,10 @@
   notify:
   - reload systemd daemon
   - restart vault
+
+- name: set required capabilities if mlock is enabled
+  capabilities:
+    path: "{{ vault_exec_path }}/vault"
+    capability: cap_ipc_lock=+ep
+    state: present
+  when: not vault_storage_disable_mlock
