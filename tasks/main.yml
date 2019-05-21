@@ -5,6 +5,13 @@
     state: present
   with_items: "{{ vault_required_packages }}"
 
+- name: "Install required mlock packages if mlock is enabled"
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ vault_required_mlock_packages }}"
+  when: not vault_storage_disable_mlock
+
 - name: "Ensure group '{{ vault_group }}' exists"
   group:
     name: "{{ vault_group }}"
