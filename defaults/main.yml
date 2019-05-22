@@ -2,6 +2,9 @@
 vault_required_packages:
   - unzip
 
+vault_required_mlock_packages:
+  - mlock
+
 vault_user: "vault"
 vault_group: "vault"
 

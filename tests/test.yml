@@ -1,5 +1,8 @@
 ---
 - hosts: all
+  vars:
+    # TODO: Test this role which enabled and disabled state to be sure everything works correctly
+    vault_storage_disable_mlock: true
 
   pre_tasks:
     - name: Update apt cache.
